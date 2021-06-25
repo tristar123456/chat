@@ -1,1 +1,9 @@
-<p>chat-window works!</p>
+
+
+
+
+<ul *ngIf="!!chats">
+  <li *ngFor="let chat of chats">
+    <a [routerLink]="[chat.id]">{{ username! |chatUsername : chat}}</a>
+  </li>
+</ul>

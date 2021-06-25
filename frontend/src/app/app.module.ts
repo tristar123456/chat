@@ -4,22 +4,48 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { ChatWindowComponent } from './chat-window/chat-window.component';
-import {Routes} from "@angular/router";
+import {RouterModule, Routes} from "@angular/router";
+import {AuthGuard} from "./auth/auth.guard";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {AuthInterceptor} from "./auth/http.interceptor";
+import { ChatDetailComponent } from './chat-detail/chat-detail.component';
+import { ChatUsernamePipe } from './chat-window/chat-username.pipe';
+import { LogoutComponent } from './logout/logout.component';
 
 const routes: Routes = [
-  {path: 'login', component: LoginComponent, canActivate: [AuthGuard]}
+  {path: 'chat', component: ChatWindowComponent, canActivate: [AuthGuard]},
+  {path: 'chat/:id', component: ChatDetailComponent, canActivate: [AuthGuard]},
+  {path: 'login', component: LoginComponent},
+  {path: 'logout', component: LogoutComponent},
+  {path: '**', redirectTo: "login"}
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    ChatWindowComponent
+    ChatWindowComponent,
+    ChatDetailComponent,
+    ChatUsernamePipe,
+    LogoutComponent,
   ],
   imports: [
-    BrowserModule
+    RouterModule.forRoot(routes),
+    BrowserModule,
+    HttpClientModule,
   ],
-  providers: [],
+  exports:[
+    RouterModule
+  ],
+  providers: [
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,1 +1,7 @@
-<p>login works!</p>
+<div class="container">
+    <input type="text" #name>
+    <input type="text" #password>
+    <button (click)="doLogin(name.value, password.value)">
+      login
+    </button>
+</div>
