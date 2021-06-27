@@ -21,8 +21,6 @@ func NewUserHandler(_jwt []byte, repository models.UserRepository) *UserHandler 
 }
 
 func (h *UserHandler) Login(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-
 	// READING BODY
 	var u models.User
 	if r.Body == nil {
@@ -65,3 +63,49 @@ func (h *UserHandler) CheckAuth(w http.ResponseWriter, r *http.Request) {
 	}
 	return
 }
+
+func (h *UserHandler) AddUser(w http.ResponseWriter, r *http.Request) {
+	//READING BODY
+	var u models.User
+	if r.Body == nil {
+		http.Error(w, "Please send a request body", 400)
+		return
+	}
+	err := json.NewDecoder(r.Body).Decode(&u)
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+	//ADD USER ENTRY
+	u, err = h.userRepo.AddUser(&u)
+	if err != nil{
+		http.Error(w, "Username already taken", 409)
+	} else{
+		json.NewEncoder(w).Encode(u.Username)
+	}
+	return
+}
+
+
+func (h *UserHandler) SearchUser(w http.ResponseWriter, r *http.Request) {
+	u, err := h.userRepo.GetUser(checkJwtToken(h.JwtSigningKey,w, r))
+	//READING BODY
+	if r.Body == nil  || err != nil{
+		http.Error(w, "Please send a request body", 400)
+		return
+	}
+	err = json.NewDecoder(r.Body).Decode(&u)
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+	//GET USER ENTRY
+	usernames, err := h.userRepo.SearchUser(u.Username)
+	if err != nil{
+		http.Error(w, "No User found", 404)
+	} else{
+		json.NewEncoder(w).Encode(usernames)
+	}
+	return
+}
+

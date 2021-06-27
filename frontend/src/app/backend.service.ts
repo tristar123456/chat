@@ -70,4 +70,22 @@ export class BackendService {
       }
     );
   }
+
+  public addUser(username: string, password: string): Promise<string>{
+    return this.httpClient.put<string>(environment.apiUrl +"/user",
+      {
+        username,
+        password
+      }
+    ).toPromise().catch(
+      error => {
+        console.log(error);
+        if ( error.status === 401){
+          this.authService.logout();
+          this.router.navigate(["login"]);
+        }
+        return "";
+      }
+    );
+  }
 }

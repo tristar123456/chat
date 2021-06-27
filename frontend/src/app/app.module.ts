@@ -11,12 +11,21 @@ import {AuthInterceptor} from "./auth/http.interceptor";
 import { ChatDetailComponent } from './chat-detail/chat-detail.component';
 import { ChatUsernamePipe } from './chat-window/chat-username.pipe';
 import { LogoutComponent } from './logout/logout.component';
+import { RegisterComponent } from './register/register.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatInputModule} from "@angular/material/input";
+import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
+import { HeaderComponent } from './header/header.component';
+import {SizeDetectorComponent} from "./size-detector/size-detector.component";
 
 const routes: Routes = [
-  {path: 'chat', component: ChatWindowComponent, canActivate: [AuthGuard]},
-  {path: 'chat/:id', component: ChatDetailComponent, canActivate: [AuthGuard]},
+  {path: 'chat', component: ChatWindowComponent, canActivate: [AuthGuard], children: [
+      {path: ':id', component: ChatDetailComponent},
+    ]},
   {path: 'login', component: LoginComponent},
   {path: 'logout', component: LogoutComponent},
+  {path: 'register', component: RegisterComponent},
   {path: '**', redirectTo: "login"}
 ];
 
@@ -28,11 +37,18 @@ const routes: Routes = [
     ChatDetailComponent,
     ChatUsernamePipe,
     LogoutComponent,
+    RegisterComponent,
+    HeaderComponent,
+    SizeDetectorComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
+    BrowserAnimationsModule,
     BrowserModule,
     HttpClientModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
   ],
   exports:[
     RouterModule

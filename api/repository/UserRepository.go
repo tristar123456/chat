@@ -32,3 +32,30 @@ func (h *UserRepository) CheckLogin(u models.User) (models.User, error){
 	return user[0], err
 }
 
+func (h *UserRepository) AddUser(u *models.User) (models.User, error){
+	var user models.User
+	rows, err := h.db.NamedQuery("INSERT INTO users (username, password) VALUES (:username, :password) RETURNING username,password", u)
+	if rows != nil{
+		rows.Next()
+		err = rows.StructScan(&user)
+	}
+	if err == nil{
+		fmt.Println("AddUser: ", user.Username)
+	} else {
+		fmt.Println("AddUser: ", err)
+	}
+	return user, err
+}
+
+func (h *UserRepository) SearchUser(username string) ([]string, error){
+	var usernames []string
+	err := h.db.Select(&usernames,"select username from users where username ~ $1", username+".*")
+	if err == nil{
+		fmt.Println("AddUser: ", "user found")
+	} else {
+		fmt.Println("AddUser: ", err)
+	}
+	return usernames, err
+}
+
+

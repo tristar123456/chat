@@ -1,0 +1,44 @@
+<div class="container-fluid fixed-top">
+  <div class="row bg-white w-100 justify-content-between align-items-center">
+    <div class="col-xl-2 col-lg-2 col-md-2 d-sm-none d-xs-none justify-content-center"></div>
+    <div class="col-xl-6 col-lg-6 col-md-10 col-sm-12 col-xs-12justify-content-center">
+      <div class="row">
+        <nav class="custom-menu col justify-content-center align-items-center">
+          <ul class="row justify-content-evenly flex-nowrap">
+            <li>
+              <a routerLink="/">Fingering</a>
+            </li>
+            <li>
+              <a routerLink="/user/{{ this.username }}">Your Userspace</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 justify-content-center">
+      <div class="row justify-content-end align-items-center flex-nowrap expand-row"
+        [class.visually-hidden]="!menuExpanded"
+        [class.show]="menuExpanded">
+        <mat-form-field>
+          <mat-label>Search</mat-label>
+          <input matInput id="userSearch" type="text" #searchForUser>
+        </mat-form-field>
+        <button mat-raised-button>
+          <mat-icon>search</mat-icon>
+        </button>
+        <button mat-raised-button>
+          <mat-icon>lock_opened</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row w-100 justify-content-between align-items-center">
+    <div class="col-xl-4 col-md-12 col-sm-12 col-xs-12 justify-content-center">
+      <div class="row expand-toggle d-flex d-xl-none d-lg-none">
+        <button (click)="menuExpanded=!menuExpanded">
+          <mat-icon>{{menuExpanded? 'keyboard_arrow_up':'keyboard_arrow_down'}}</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

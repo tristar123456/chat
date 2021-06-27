@@ -1,0 +1,17 @@
+<div class="container">
+  <mat-form-field>
+    <mat-label>
+      Username
+    </mat-label>
+    <input matInput type="text" #username>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>
+      Password
+    </mat-label>
+    <input matInput type="text" #password>
+  </mat-form-field>
+  <button mat-raised-button (click)="addUser(username.value, password.value)">
+    Login
+  </button>
+</div>
