@@ -23,8 +23,9 @@ export class BackendService {
     let username = this.authService.getUsername();
     if ( !!username){
       return username
+    }else{
+      return "none";
     }
-    return "none";
   }
 
   public getChats(): Promise<Chat[]>{
@@ -47,6 +48,21 @@ export class BackendService {
           this.router.navigate(["login"]);
         }
         return {} as Message[];
+      }
+    );
+  }
+
+  public addChat(username2: string): Promise<string> {
+    return this.httpClient.put<string>(environment.apiUrl +"/chat",{
+      name: username2
+    }).toPromise().catch(
+      error => {
+        console.log(error);
+        if ( error.status === 401){
+          this.authService.logout();
+          this.router.navigate(["login"]);
+        }
+        return "";
       }
     );
   }
@@ -85,6 +101,23 @@ export class BackendService {
           this.router.navigate(["login"]);
         }
         return "";
+      }
+    );
+  }
+
+  public searchUser(search: string): Promise<string[]>{
+    return this.httpClient.post<string[]>(environment.apiUrl +"/user",
+      {
+        search: search
+      }
+    ).toPromise().catch(
+      error => {
+        console.log(error);
+        if ( error.status === 401){
+          this.authService.logout();
+          this.router.navigate(["login"]);
+        }
+        return [];
       }
     );
   }

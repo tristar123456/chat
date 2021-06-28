@@ -1,0 +1,7 @@
+<div class="container">
+  <ul>
+    <li *ngFor="let username2 of searchService.usernames" (click)="openChat(username2)">
+      {{username2}}
+    </li>
+  </ul>
+</div>

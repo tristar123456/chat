@@ -86,21 +86,21 @@ func (h *UserHandler) AddUser(w http.ResponseWriter, r *http.Request) {
 	return
 }
 
-
 func (h *UserHandler) SearchUser(w http.ResponseWriter, r *http.Request) {
-	u, err := h.userRepo.GetUser(checkJwtToken(h.JwtSigningKey,w, r))
+	_, err := h.userRepo.GetUser(checkJwtToken(h.JwtSigningKey,w, r))
 	//READING BODY
 	if r.Body == nil  || err != nil{
 		http.Error(w, "Please send a request body", 400)
 		return
 	}
-	err = json.NewDecoder(r.Body).Decode(&u)
+	var s models.SearchString
+	err = json.NewDecoder(r.Body).Decode(&s)
 	if err != nil {
 		http.Error(w, err.Error(), 400)
 		return
 	}
 	//GET USER ENTRY
-	usernames, err := h.userRepo.SearchUser(u.Username)
+	usernames, err := h.userRepo.SearchUser(s.Search)
 	if err != nil{
 		http.Error(w, "No User found", 404)
 	} else{

@@ -47,7 +47,7 @@ func (h *ChatRepository) GetMessagesByChat(username string, _id string) ([]model
 	return messages, err
 }
 
-func (h *ChatRepository) AddMessage(username string, _id string, msg models.Message) (models.Chat, error){
+func (h *ChatRepository) AddMessage(msg models.Message) (models.Chat, error){
 	var chat models.Chat
 	_, err := h.db.NamedQuery(
 		"INSERT INTO messages (cid, frm, txt) VALUES (:cid, :frm, :txt)",
@@ -55,5 +55,26 @@ func (h *ChatRepository) AddMessage(username string, _id string, msg models.Mess
 		)
 	fmt.Println("AddMessage: ",err)
 	return chat, err
+}
+
+func (h *ChatRepository) AddChat(username1 string, username2 string) (string, error){
+	var id string
+	var chats []models.Chat
+	err := h.db.Select(&chats,
+		"SELECT * FROM chats WHERE (username1=$1 AND username2=$2) OR (username1=$2 AND username2=$1)",
+		username1, username2,
+	)
+	if len(chats) == 0 {
+		_rows, _ := h.db.Queryx(
+			"INSERT INTO chats (username1, username2) VALUES ($1, $2) RETURNING id",
+			username1, username2,
+		)
+		_rows.Next()
+		err = _rows.Scan(&id)
+	} else {
+		id = chats[0].Id
+	}
+	fmt.Println("AddChat: ",err)
+	return id, err
 }
 

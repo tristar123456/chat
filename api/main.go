@@ -74,9 +74,10 @@ func main() {
 
 	r.Post("/api/login", userHandler.Login)
 	r.Put("/api/user", userHandler.AddUser)
-	r.Get("/api/user", userHandler.SearchUser)
+	r.Post("/api/user", userHandler.SearchUser)
 	r.Post("/api/checkauth", userHandler.CheckAuth)
 	r.Get("/api/chat", chatHandler.GetAllChats)
+	r.Put("/api/chat", chatHandler.AddChat)
 	r.Get("/api/chat/{id}", chatHandler.GetMessagesByChat)
 	r.Put("/api/chat/{id}", chatHandler.AddMessage)
 

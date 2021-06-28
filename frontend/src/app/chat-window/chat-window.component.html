@@ -1,9 +1,5 @@
-
-
-
-
 <ul *ngIf="!!chats">
   <li *ngFor="let chat of chats">
-    <a [routerLink]="[chat.id]">{{ username! |chatUsername : chat}}</a>
+    <a href="" [routerLink]="[chat.id]" routerLinkActive="true">{{ username! |chatUsername : chat}}</a>
   </li>
 </ul>

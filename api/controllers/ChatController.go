@@ -3,6 +3,7 @@ package controllers
 import (
 	"api/models"
 	"encoding/json"
+	"fmt"
 	"github.com/go-chi/chi"
 	"net/http"
 )
@@ -45,7 +46,7 @@ func (h *ChatHandler) GetMessagesByChat(w http.ResponseWriter, r *http.Request) 
 }
 func (h *ChatHandler) AddMessage(w http.ResponseWriter, r *http.Request) {
 	_id := chi.URLParam(r, "id")
-	username := checkJwtToken(h.JwtSigningKey, w, r)
+	checkJwtToken(h.JwtSigningKey, w, r)
 	var msg models.Message
 	if r.Body == nil {
 		http.Error(w, "Please send a request body", 400)
@@ -57,11 +58,41 @@ func (h *ChatHandler) AddMessage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	msg.CId = _id
-	chat, err := h.chatRepo.AddMessage(username, _id, msg)
+	chat, err := h.chatRepo.AddMessage(msg)
 	if err != nil{
 		http.Error(w, err.Error(), 403)
 	} else {
 		if err:=json.NewEncoder(w).Encode(chat); err != nil{
+			http.Error(w, err.Error(), 403)
+		}
+	}
+	return
+}
+
+func (h *ChatHandler) AddChat(w http.ResponseWriter, r *http.Request) {
+	var user struct{
+		Name2 string `json:"name"`
+	}
+	username1 := checkJwtToken(h.JwtSigningKey, w, r)
+	if r.Body == nil {
+		http.Error(w, "Please send a request body", 400)
+		return
+	}
+
+	err := json.NewDecoder(r.Body).Decode(&user)
+	fmt.Println(user.Name2)
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+	id, err := h.chatRepo.AddChat(username1,user.Name2)
+	if id == "" {
+		http.Error(w, "Conflict with other chat", 409)
+	}
+	if err != nil{
+		http.Error(w, err.Error(), 403)
+	} else {
+		if err:=json.NewEncoder(w).Encode(id); err != nil{
 			http.Error(w, err.Error(), 403)
 		}
 	}

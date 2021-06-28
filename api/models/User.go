@@ -7,6 +7,10 @@ type User struct {
 
 type Users []User
 
+type SearchString struct{
+	Search string `json:"search"`
+}
+
 type UserRepository interface {
 	CheckLogin(u User) (User, error)
 	GetUser(username string) (User, error)

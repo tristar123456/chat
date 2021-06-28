@@ -1,7 +1,7 @@
 <header>
-  <app-header></app-header>
+  <app-header [clickEvent]="toggleMenuEvent"></app-header>
 </header>
-<main>
+<main (click)="toggleMenu()">
   <router-outlet>
   </router-outlet>
 </main>

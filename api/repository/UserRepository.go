@@ -51,9 +51,9 @@ func (h *UserRepository) SearchUser(username string) ([]string, error){
 	var usernames []string
 	err := h.db.Select(&usernames,"select username from users where username ~ $1", username+".*")
 	if err == nil{
-		fmt.Println("AddUser: ", "user found")
+		fmt.Println("SearchUser: ", "user found")
 	} else {
-		fmt.Println("AddUser: ", err)
+		fmt.Println("SearchUser: ", err)
 	}
 	return usernames, err
 }

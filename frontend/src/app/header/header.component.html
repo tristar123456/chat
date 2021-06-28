@@ -6,10 +6,10 @@
         <nav class="custom-menu col justify-content-center align-items-center">
           <ul class="row justify-content-evenly flex-nowrap">
             <li>
-              <a routerLink="/">Fingering</a>
+              <a routerLink="/chat">Chats</a>
             </li>
             <li>
-              <a routerLink="/user/{{ this.username }}">Your Userspace</a>
+              <a routerLink="/user/">Find Friends</a>
             </li>
           </ul>
         </nav>
@@ -23,10 +23,10 @@
           <mat-label>Search</mat-label>
           <input matInput id="userSearch" type="text" #searchForUser>
         </mat-form-field>
-        <button mat-raised-button>
+        <button mat-raised-button (click)="searchUser(searchForUser.value)">
           <mat-icon>search</mat-icon>
         </button>
-        <button mat-raised-button>
+        <button mat-raised-button [routerLink]="['logout']">
           <mat-icon>lock_opened</mat-icon>
         </button>
       </div>
