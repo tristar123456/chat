@@ -19,6 +19,8 @@ import {MatIconModule} from "@angular/material/icon";
 import {HeaderComponent} from './header/header.component';
 import {SizeDetectorComponent} from "./size-detector/size-detector.component";
 import {UserComponent} from './user/user.component';
+import {MatError} from "@angular/material/form-field";
+import {ReactiveFormsModule} from "@angular/forms";
 
 const routes: Routes = [
   {path: 'chat', component: ChatWindowComponent, canActivate: [AuthGuard], children:[
@@ -52,6 +54,7 @@ const routes: Routes = [
     MatInputModule,
     MatButtonModule,
     MatIconModule,
+    ReactiveFormsModule
   ],
   exports: [
     RouterModule

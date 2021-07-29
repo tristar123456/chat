@@ -1,0 +1,12 @@
+.container-fluid{
+  background-image: url("../../../src/assets/images/bg-leaves-green.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.login-window{
+  padding: 40px 60px;
+  border-radius: 10px;
+  box-shadow: 0 0 3px 3px #312b2b inset;
+  background-color: white;
+}

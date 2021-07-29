@@ -19,10 +19,16 @@ func NewUserRepository(db *sqlx.DB) *UserRepository{
 }
 
 func (h *UserRepository) GetUser(username string) (models.User, error){
-	var user []models.User
-	err := h.db.Select(&user, "SELECT * FROM users WHERE username=$1",username)
-	fmt.Println(err)
-	return user[0], err
+	var users []models.User
+	var user models.User
+	err := h.db.Select(&users, "SELECT * FROM users WHERE username=$1",username)
+	if len(users) == 1{
+	    user = users[0]
+		fmt.Println("GetUser: User found!")
+		return user, err
+	} else{
+	    return user,err
+	}
 }
 
 func (h *UserRepository) CheckLogin(u models.User) (models.User, error){
@@ -31,10 +37,12 @@ func (h *UserRepository) CheckLogin(u models.User) (models.User, error){
 	var user models.User
 	if len(users) == 1{
 		user = users[0]
-		fmt.Println("CheckLogin: User not found!")
+		fmt.Println("CheckLogin: TRUE")
 		return user, err
+	} else {
+		fmt.Println("CheckLogin: FALSE")
+		return user, fmt.Errorf("CheckLogin: FALSE")
 	}
-	return user, err
 }
 
 func (h *UserRepository) AddUser(u *models.User) (models.User, error){
@@ -55,12 +63,12 @@ func (h *UserRepository) AddUser(u *models.User) (models.User, error){
 func (h *UserRepository) SearchUser(username string) ([]string, error){
 	var usernames []string
 	err := h.db.Select(&usernames,"select username from users where username ~ $1" ,username+".*")
-	if err == nil{
-		fmt.Println("SearchUser: ", "user found")
+	if err == nil && len(usernames) >= 1{
+		fmt.Println("SearchUser: user found")
+	    return usernames, err
 	} else {
-		fmt.Println("SearchUser: ", err)
+		return usernames, fmt.Errorf("SearchUser: user not found!")
 	}
-	return usernames, err
 }
 
 
