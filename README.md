@@ -2,6 +2,13 @@
 
 In this project you will find a frontend for user interactions written in `Typescript` (Angular) and a backend written in `golang`
 
+# Prerequisitory
+
+* [NodeJS](https://nodejs.org/en/)
+* [Angular](https://angular.io/)
+* [Golang](https://golang.org/)
+* [Docker](https://www.docker.com/get-started)
+
 ## Run Frontend
 
 Use the following command to run the frontend
@@ -16,7 +23,7 @@ Use the following command to run the backend
 ```
 npm run backend
 ```
-> Note: You will need `docker-compose` as well as `docker` to be able to run the backend
+> Note: You may need `docker-compose` as well as `docker` to be able to run the backend
 
 ## Where is my website?
 
