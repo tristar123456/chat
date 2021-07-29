@@ -37,9 +37,9 @@ CREATE TABLE IF NOT EXISTS messages (
 `
 
 var test_data=`
-INSERT INTO users (username, password) VALUES ('Test','t');
-INSERT INTO users (username, password) VALUES ('d','o');
-INSERT INTO users (username, password) VALUES ('Frank','w');
+INSERT INTO users (username, password) VALUES ('Test','test');
+INSERT INTO users (username, password) VALUES ('User','user');
+INSERT INTO users (username, password) VALUES ('Root','root');
 `
 
 func main() {
@@ -78,7 +78,7 @@ func main() {
 	r.Post("/api/checkauth", userHandler.CheckAuth)
 	r.Get("/api/chat", chatHandler.GetAllChats)
 	r.Put("/api/chat", chatHandler.AddChat)
-	r.Get("/api/chat/{id}", chatHandler.GetMessagesByChat)
+	r.Get("/api/chat/{username2}", chatHandler.GetMessagesByChat)
 	r.Put("/api/chat/{id}", chatHandler.AddMessage)
 
 	log.Fatal(http.ListenAndServe(":9000", r))

@@ -18,7 +18,7 @@ type Message struct {
 
 type ChatRepository interface {
 	GetChatsByUsername(username string)([]Chat, error)
-	GetMessagesByChat(username string, _id string)([]Message, error)
+	GetMessagesByChat(username1 string, username2 string)([]Message, error)
 	AddMessage (msg Message) (Chat, error)
 	AddChat (username1 string, username2 string) (string, error)
 }

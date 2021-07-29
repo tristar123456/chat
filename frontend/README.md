@@ -1,28 +1,31 @@
-# Frontend
+# Simple Chat
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.5.
+In this project you will find a frontend for user interactions written in `Typescript` (Angular) and a backend written in `golang`
 
-## Development server
+## Run Frontend
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Use the following command to run the frontend
+```
+npm run start
+```
 
-## Code scaffolding
+## Run Backend
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Use the following command to run the backend
+```
+npm run backend
+```
+> Note: You will need `docker-compose` as well as `docker` to be able to run the backend
 
-## Build
+## Where is my website?
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+If the upper steps were completed successfully, the website can by reached by
+[http://localhost:4200](http://localhost:4200). On the upcoming login page you can use the following credientials:
 
-## Running unit tests
+Username|password
+--- | ---
+User|user
+Test|test
+Root|root
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-# chat
+> This is for test purposes only of course

@@ -2,16 +2,18 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Router} from "@angular/router";
+import {BehaviorSubject, Observable} from "rxjs";
+import {subscribeTo} from "rxjs/internal-compatibility";
 
 const LOGIN_URL = '/login';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService{
 
-  private authenticated: boolean = false;
-  private username: string| undefined;
+  private authenticated$ = new BehaviorSubject<boolean>(false)
+  private username$ = new BehaviorSubject<string>("");
 
   constructor(
     private httpClient: HttpClient,
@@ -20,9 +22,12 @@ export class AuthService {
     if (localStorage.getItem(environment.sessionStorageKey)){
       this.checkAuth().then(
         username => {
-          this.authenticated = true;
-          this.username = username;
-          this.router.navigate(["chat"]);
+          if( username !== ""){
+            this.username$.next(username!);
+          } else {
+            this.username$.next("none");
+          }
+          this.authenticated$.next(true);
         }
       );
     }
@@ -33,14 +38,14 @@ export class AuthService {
       username, password
     }).toPromise().then( res => {
       if (!!res) {
-        this.authenticated = true;
-        this.username = username;
+        this.username$.next(username);
+        this.authenticated$.next(true);
         localStorage.setItem(environment.sessionStorageKey, res);
       }
     }).catch( error => {
       console.log(error.status)
     });
-    return this.authenticated;
+    return this.authenticated$.value;
   }
 
   private async checkAuth(): Promise<string|undefined>{
@@ -52,16 +57,16 @@ export class AuthService {
     );
   }
 
-  public isAuthenticated(): boolean {
-    return this.authenticated;
+  public isAuthenticated(): Observable<boolean> {
+    return this.authenticated$.asObservable();
   }
 
-  public getUsername(): string | undefined{
-    return this.username;
+  public getUsername(): string{
+    return this.username$.value;
   }
 
   public logout(): void {
-    this.authenticated = false;
+    this.authenticated$.next(false);
     localStorage.removeItem(environment.sessionStorageKey)
   }
 }

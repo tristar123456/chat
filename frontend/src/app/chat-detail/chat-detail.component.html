@@ -1,7 +1,12 @@
-<h1>CHAT ID {{chat_id}}</h1>
-<ul>
-  <li *ngFor="let msg of getAllMessages()">
-    {{msg.txt}}
-  </li>
-</ul>
-<input type="text" (keydown.enter)="sendMessage($event)">
+<div class="container-fluid">
+  <div class="col">
+    <h1>{{username2}}</h1>
+    <ul>
+      <li *ngFor="let msg of getAllMessages()">
+        {{msg.txt}}
+      </li>
+    </ul>
+    <textarea (keydown.enter)="sendMessage($event)"></textarea>
+
+  </div>
+</div>

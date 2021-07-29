@@ -33,8 +33,8 @@ func (h *ChatHandler) GetAllChats(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *ChatHandler) GetMessagesByChat(w http.ResponseWriter, r *http.Request) {
-	_id := chi.URLParam(r, "id")
-	messages, err := h.chatRepo.GetMessagesByChat(checkJwtToken(h.JwtSigningKey, w, r), _id)
+	username2 := chi.URLParam(r, "username2")
+	messages, err := h.chatRepo.GetMessagesByChat(checkJwtToken(h.JwtSigningKey, w, r), username2)
 	if err != nil{
 		http.Error(w, err.Error(), 403)
 	} else {

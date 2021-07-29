@@ -21,13 +21,14 @@ import {SizeDetectorComponent} from "./size-detector/size-detector.component";
 import {UserComponent} from './user/user.component';
 
 const routes: Routes = [
-  {path: 'chat', component: ChatWindowComponent, canActivate: [AuthGuard]},
-  {path: 'chat/:id', component: ChatDetailComponent, canActivate: [AuthGuard]},
+  {path: 'chat', component: ChatWindowComponent, canActivate: [AuthGuard], children:[
+      {path: ':id', component: ChatDetailComponent}
+  ]},
   {path: 'user', component: UserComponent, canActivate: [AuthGuard]},
-  {path: 'login', component: LoginComponent},
+  {path: 'login', component: LoginComponent,},
   {path: 'logout', component: LogoutComponent, canActivate: [AuthGuard]},
   {path: 'register', component: RegisterComponent},
-  {path: '**', redirectTo: "login"}
+  {path: '**', component: LoginComponent}
 ];
 
 @NgModule({

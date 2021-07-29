@@ -17,18 +17,23 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   size: number | undefined;
 
   username: string = '';
+  loggedIn: boolean = false;
 
   constructor(
     private router: Router,
     private resizeService: ResizeService,
     private authService: AuthService,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private backendService: BackendService
   ) {
   }
 
   ngOnInit(): void {
     this.menuExpanded = false;
-    this.username = this.authService.getUsername()!;
+    this.username=this.backendService.getUsername();
+    this.authService.isAuthenticated().subscribe((val)=>{
+      this.loggedIn = val;
+    })
   }
 
   ngAfterViewInit(): void {

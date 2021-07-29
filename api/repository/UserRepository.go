@@ -26,10 +26,15 @@ func (h *UserRepository) GetUser(username string) (models.User, error){
 }
 
 func (h *UserRepository) CheckLogin(u models.User) (models.User, error){
-	var user []models.User
-	err := h.db.Select(&user, "SELECT * FROM users WHERE username=$1 AND password=$2",u.Username,u.Password)
-	fmt.Println(err)
-	return user[0], err
+	var users []models.User
+	err := h.db.Select(&users, "SELECT * FROM users WHERE username=$1 AND password=$2",u.Username,u.Password)
+	var user models.User
+	if len(users) == 1{
+		user = users[0]
+		fmt.Println("CheckLogin: User not found!")
+		return user, err
+	}
+	return user, err
 }
 
 func (h *UserRepository) AddUser(u *models.User) (models.User, error){
@@ -49,7 +54,7 @@ func (h *UserRepository) AddUser(u *models.User) (models.User, error){
 
 func (h *UserRepository) SearchUser(username string) ([]string, error){
 	var usernames []string
-	err := h.db.Select(&usernames,"select username from users where username ~ $1", username+".*")
+	err := h.db.Select(&usernames,"select username from users where username ~ $1" ,username+".*")
 	if err == nil{
 		fmt.Println("SearchUser: ", "user found")
 	} else {

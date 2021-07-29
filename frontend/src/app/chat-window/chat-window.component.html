@@ -1,5 +1,15 @@
-<ul *ngIf="!!chats">
-  <li *ngFor="let chat of chats">
-    <a href="" [routerLink]="[chat.id]" routerLinkActive="true">{{ username! |chatUsername : chat}}</a>
-  </li>
-</ul>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xl-1 col-lg-2 col-md-2 justify-content-center">
+      <ul *ngIf="!!chats" class="chat-list">
+        <li *ngFor="let username2 of chats | chatUsername : username" class="chat-list-item">
+          <a href="" [routerLink]="[username2]" routerLinkActive="true" class="chat-list-item-link">{{ username2 }}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-auto">
+      <router-outlet>
+      </router-outlet>
+    </div>
+  </div>
+</div>

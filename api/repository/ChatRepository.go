@@ -28,11 +28,11 @@ func (h *ChatRepository) GetChatsByUsername(username string) ([]models.Chat, err
 	return chats, err
 }
 
-func (h *ChatRepository) GetMessagesByChat(username string, _id string) ([]models.Message, error){
+func (h *ChatRepository) GetMessagesByChat(username1 string, username2 string) ([]models.Message, error){
 	var chats []models.Chat
 	err := h.db.Select(&chats,
-		"SELECT * FROM chats WHERE (username1=$1 OR username2=$1) AND id=$2",
-		username, _id,
+		"SELECT * FROM chats WHERE (username1=$1 AND username2=$2) OR (username1=$2 AND username2=$1)",
+		username1, username2,
 	)
 	var messages []models.Message
 	if len(chats) > 1{

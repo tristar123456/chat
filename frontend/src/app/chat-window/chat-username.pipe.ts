@@ -6,10 +6,13 @@ import {Chat} from "../chat-detail/Chat";
 })
 export class ChatUsernamePipe implements PipeTransform {
 
-  transform(username: string, chat: Chat): unknown {
-    return (username===chat.username1?
-      (chat.username2===""?"none":chat.username2):
-      (chat.username1===""?"none":chat.username1));
+  transform( chats: Chat[],username: string): string[] {
+    return chats.map<string>((chat) => {
+      return username===chat.username1?
+        (chat.username2===""?"none":chat.username2):
+        (chat.username1===""?"none":chat.username1)
+    }).sort();
   }
+
 
 }
