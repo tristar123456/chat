@@ -8,6 +8,7 @@ Use the following command to run the frontend
 ```
 npm run start
 ```
+> Make sure you change to the frontend directory first by using `cd frontend`
 
 ## Run Backend
 
