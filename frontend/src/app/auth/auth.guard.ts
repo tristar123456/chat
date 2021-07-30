@@ -3,6 +3,8 @@ import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTre
 import { Observable } from 'rxjs';
 import {AuthService} from "./auth.service";
 
+const LOGIN_URL = '/login';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -20,11 +22,14 @@ export class AuthGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if( !!this.authenticated){
-      return true;
-    } else {
-      return false;
-    }
+    setTimeout(()=>{
+      if (!!this.authenticated) {
+        this.router.navigateByUrl(state.url);
+      } else {
+        this.router.navigateByUrl(LOGIN_URL);
+      }
+    },200)
+    return !!this.authenticated;
   }
 
 }
