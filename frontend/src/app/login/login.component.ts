@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../auth/auth.service";
 import {Router} from "@angular/router";
-import {BehaviorSubject, Observable, of} from "rxjs";
-import {AbstractControl, FormControl, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
-import {wrongCredentialsValidator} from "./wrongCredentials.directive";
+import {BehaviorSubject} from "rxjs";
+import {FormControl, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-login',
@@ -13,8 +12,8 @@ import {wrongCredentialsValidator} from "./wrongCredentials.directive";
 export class LoginComponent implements OnInit {
   public loginStatus$ = new BehaviorSubject<boolean>(false);
 
-  public username = new FormControl('', [Validators.required, wrongCredentialsValidator(this.loginStatus$)]);
-  public password = new FormControl('', [Validators.required, wrongCredentialsValidator(this.loginStatus$)]);
+  public username = new FormControl('', [Validators.required]);
+  public password = new FormControl('', [Validators.required]);
 
   constructor(
     private router: Router,

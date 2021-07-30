@@ -1,18 +1,18 @@
-<div class="container-fluid h-100 w-100">
+<div class="container-fluid h-100 w-100" (keydown.enter)="doLogin()">
   <div class="row h-100 justify-content-center align-items-center">
     <div class="col-xl-4 col-lg-4 col-md-8 col-sm-12 col-xs-12 login-window">
       <div class="row">
         <mat-form-field>
           <mat-label>Username</mat-label>
           <input matInput type="text" [formControl]="username" required>
-          <mat-error *ngIf="username.invalid">Wrong Username</mat-error>
+          <mat-error *ngIf="username.invalid">Username required</mat-error>
         </mat-form-field>
       </div>
       <div class="row">
         <mat-form-field>
           <mat-label>Password</mat-label>
           <input matInput type="password" [formControl]="password" required>
-          <mat-error *ngIf="username.invalid">Wrong Password</mat-error>
+          <mat-error *ngIf="username.invalid">Password required</mat-error>
         </mat-form-field>
       </div>
       <div class="row justify-content-end">
