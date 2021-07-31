@@ -65,8 +65,8 @@ const routes: Routes = [
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
-
+    },
+    ChatUsernamePipe
   ],
   bootstrap: [AppComponent]
 })

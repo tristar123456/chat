@@ -1,7 +1,29 @@
 <div class="container">
-  <ul>
-      <li *ngFor="let username2 of usernames">
-        <a role="link" (click)="openChat(username2)">{{username2}}</a>
-      </li>
-  </ul>
+  <div class="col-12">
+    <div class="row justify-content-center">
+      <div class="col-xl-6 col-lg-8 col-md-10 col-sm-10 col-xs-12">
+        <div class="row">
+          <h3>Friends</h3>
+        </div>
+        <div class="row justify-content-center">
+          <ul class="w-75 user-list">
+            <li class="user-list-item" *ngFor="let username2 of friends" (click)="openChat(username2)">
+              <a role="link">{{username2}}</a>
+            </li>
+          </ul>
+        </div>
+        <hr>
+        <div class="row">
+          <h3>Other Users</h3>
+        </div>
+        <div class="row justify-content-center">
+          <ul class="w-75 user-list">
+            <li class="user-list-item" *ngFor="let username2 of usernames" (click)="openChat(username2)">
+              <a role="link">{{username2}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
