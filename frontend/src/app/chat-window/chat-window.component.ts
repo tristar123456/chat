@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {BackendService} from "../backend.service";
 import {Chat} from "../chat-detail/Chat";
 import {pipe} from "rxjs";
+import {ResizeService} from "../size-detector/resize.service";
 
 @Component({
   selector: 'app-chat-window',
@@ -14,7 +15,8 @@ export class ChatWindowComponent implements OnInit {
   chatId: string = "";
 
   constructor(
-    private backendService: BackendService
+    private backendService: BackendService,
+    private resizeService: ResizeService
   ) {
   }
 

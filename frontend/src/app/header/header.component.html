@@ -24,7 +24,7 @@
         [class.show]="menuExpanded">
         <mat-form-field>
           <mat-label>Search</mat-label>
-          <input matInput id="userSearch" type="text" #searchForUser>
+          <input matInput id="userSearch" (keyup)="searchUser(searchForUser.value)" type="text" #searchForUser>
         </mat-form-field>
         <button mat-raised-button (click)="searchUser(searchForUser.value)">
           <mat-icon>search</mat-icon>
