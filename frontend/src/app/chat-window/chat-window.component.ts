@@ -3,6 +3,7 @@ import {BackendService} from "../backend.service";
 import {Chat} from "../chat-detail/Chat";
 import {pipe} from "rxjs";
 import {ResizeService} from "../size-detector/resize.service";
+import {SCREEN_SIZE} from "../size-detector/screen-size.enum";
 
 @Component({
   selector: 'app-chat-window',
@@ -13,6 +14,8 @@ export class ChatWindowComponent implements OnInit {
   chats: Chat[] | undefined;
   username: string = "";
   chatId: string = "";
+  hideChats = false;
+  public toggleLock: boolean = false;
 
   constructor(
     private backendService: BackendService,
@@ -25,7 +28,13 @@ export class ChatWindowComponent implements OnInit {
       this.username = this.backendService.getUsername();
       this.chats = [] as Chat[];
       this.getChats();
-    }, 200)
+    }, 200);
+    (this.resizeService.current!) >2 ? [this.hideChats, this.toggleLock] = [false, false] : [this.hideChats, this.toggleLock] = [true, true];
+    this.resizeService.onResize$.subscribe( size => {
+
+      size >2 ? this.hideChats = false : this.hideChats = true;
+      size >2 ? this.toggleLock = false : this.toggleLock = true;
+    });
   }
 
   private getChats(): void{

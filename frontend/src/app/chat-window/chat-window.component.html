@@ -1,13 +1,20 @@
 <div class="container">
-  <div class="row">
-    <div class="col-2 justify-content-center">
+  <div class="row justify-content-start flex-nowrap">
+    <div class="col-2 justify-content-center" [class.hidden]="hideChats" (click)="hideChats = this.toggleLock">
       <ul *ngIf="!!chats" class="chat-list">
         <li *ngFor="let username2 of chats | chatUsername : username" class="chat-list-item">
           <a href="" [routerLink]="[username2]" routerLinkActive="true" class="chat-list-item-link">{{ username2 }}</a>
         </li>
       </ul>
     </div>
-    <div class="col-auto">
+    <div class="col-1 d-flex d-xl-none d-lg-none" [class.hidden]="!hideChats">
+      <button class="btn btn-toggle text-nowrap" (click)="hideChats=!hideChats">
+        <mat-icon>
+          keyboard_arrow_right
+        </mat-icon>
+      </button>
+    </div>
+    <div class="col-auto" (click)="hideChats = this.toggleLock">
       <router-outlet>
       </router-outlet>
     </div>
