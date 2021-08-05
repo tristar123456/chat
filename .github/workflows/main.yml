@@ -35,5 +35,4 @@ jobs:
           echo test, and deploy your project.
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.4.0
-        with: |
-          npm install @angular/cli
+        run: npm install @angular/cli
