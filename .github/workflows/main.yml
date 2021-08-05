@@ -33,6 +33,5 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v2.4.0
-        run: npm install @angular/cli
+      - name: Angular Github Actions
+        uses: mayurrawte/github-angular-actions@latest
