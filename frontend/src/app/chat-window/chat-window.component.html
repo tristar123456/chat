@@ -14,7 +14,9 @@
         </mat-icon>
       </button>
     </div>
-    <div class="col-auto" id="chatDetailsView" (click)="this.hideChats = this.toggleLock;"  [class.hidden]="!hideChats">
+    <div class="col-auto" id="chatDetailsView"
+         (click)="this.hideChats = this.toggleLock;"
+         [class.hidden]="!hideChats && toggleLock">
       <router-outlet>
       </router-outlet>
     </div>

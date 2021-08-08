@@ -12,15 +12,6 @@ import {SCREEN_SIZE} from "../size-detector/screen-size.enum";
 })
 export class ChatWindowComponent implements OnInit {
 
-  @HostListener('document:click', ['$event'])
-  documentClick(event: MouseEvent){
-      if (!this.hideChats){
-        if (!this.toggleLock){
-          this.hideChats = true;
-        }
-      }
-  }
-
   chats: Chat[] | undefined;
   username: string = "";
   chatId: string = "";
