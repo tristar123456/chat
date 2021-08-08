@@ -7,14 +7,14 @@
         </li>
       </ul>
     </div>
-    <div class="col-1 d-flex d-xl-none d-lg-none" [class.hidden]="!hideChats">
-      <button class="btn btn-toggle text-nowrap" (click)="hideChats=!hideChats">
-        <mat-icon>
+    <div class="col-1 d-flex d-xl-none d-lg-none toggle">
+      <button class="btn text-nowrap" (click)="hideChats=!hideChats">
+        <mat-icon [class.flip-arrow-side]="!hideChats">
           keyboard_arrow_right
         </mat-icon>
       </button>
     </div>
-    <div class="col-auto" (click)="hideChats = this.toggleLock">
+    <div class="col-auto" id="chatDetailsView" (click)="this.hideChats = this.toggleLock;"  [class.hidden]="!hideChats">
       <router-outlet>
       </router-outlet>
     </div>

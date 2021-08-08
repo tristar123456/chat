@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {BackendService} from "../backend.service";
 import {Chat} from "../chat-detail/Chat";
 import {pipe} from "rxjs";
@@ -11,6 +11,16 @@ import {SCREEN_SIZE} from "../size-detector/screen-size.enum";
   styleUrls: ['./chat-window.component.scss']
 })
 export class ChatWindowComponent implements OnInit {
+
+  @HostListener('document:click', ['$event'])
+  documentClick(event: MouseEvent){
+      if (!this.hideChats){
+        if (!this.toggleLock){
+          this.hideChats = true;
+        }
+      }
+  }
+
   chats: Chat[] | undefined;
   username: string = "";
   chatId: string = "";
