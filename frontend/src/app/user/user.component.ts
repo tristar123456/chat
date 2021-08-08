@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewChecked, AfterViewInit, Component, OnInit} from '@angular/core';
 import {BackendService} from "../backend.service";
 import {Router} from "@angular/router";
 import {SearchService} from "../search.service";
@@ -13,8 +13,8 @@ import {Chat} from "../chat-detail/Chat";
 })
 export class UserComponent implements OnInit {
   username: string | undefined;
-  usernames: string[] = [];
-  friends: string[] = [];
+  usernames: string[]| undefined;
+  friends: string[]| undefined;
 
   constructor(
     private backendService: BackendService,
@@ -32,7 +32,7 @@ export class UserComponent implements OnInit {
           this.friends = this.chatUsernamePipe.transform(chats, this.username ?? "").filter((friendName)=>{
             return usernames.find(name => friendName === name);
           });
-          this.usernames = usernames.filter((username) => !this.friends.find(friendName=> friendName === username));
+          this.usernames = usernames.filter((username) => !this.friends!.find(friendName=> friendName === username));
         },
         (err) => {
           console.log(err);

@@ -18,11 +18,12 @@
     background-color: #558855;
 
     transition: 50ms ease;
-    a{
+
+    a {
       width: 100%;
     }
 
-    &:hover{
+    &:hover {
       box-shadow: 0 0 3px 1px #312b2b;
       transform: translateY(-1px);
       transition: 100ms ease;
@@ -31,11 +32,11 @@
 }
 
 
-hr{
+hr {
   margin: 20px 10px;
 }
 
-h3{
+h3 {
   font-size: 24px;
   letter-spacing: 0.8px;
 }
