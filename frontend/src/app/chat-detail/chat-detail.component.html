@@ -1,12 +1,21 @@
-<div class="container">
-  <div class="col">
-    <h1>{{username2}}</h1>
-    <ul>
-      <li *ngFor="let msg of getAllMessages()">
-        {{msg.txt}}
-      </li>
+<div class="container-fluid">
+  <div class="w-100 col-12">
+    <h1 class="chat-caption">{{username2}}</h1>
+    <cdk-virtual-scroll-viewport itemSize="20" class="messages">
+      <ul *ngIf="messages">
+        <li *cdkVirtualFor="let msg of messages">
+          {{msg.txt}}
+        </li>
     </ul>
-    <textarea (keydown.enter)="sendMessage($event)"></textarea>
+    </cdk-virtual-scroll-viewport>
+    <div class="chat-write fixed-bottom row">
+      <div class="col-10 no-gutters">
+        <textarea (keydown.enter)="sendMessage()" [formControl]="chatTextArea" required></textarea>
+      </div>
+      <div class="col-2 no-gutters">
+        <button class="btn btn-primary" [disabled]="chatTextArea.invalid">Send</button>
+      </div>
+    </div>
 
   </div>
 </div>

@@ -1,9 +1,11 @@
-<div class="container">
-  <div class="row justify-content-start flex-nowrap">
-    <div class="col-2 justify-content-center" [class.hidden]="hideChats" (click)="hideChats = this.toggleLock">
-      <ul *ngIf="!!chats" class="chat-list">
+<div class="container-custom">
+  <div class="row-custom justify-content-start flex-nowrap">
+    <div class="col-2 no-gutters justify-content-center chat-list" [class.hidden]="hideChats"
+         (click)="hideChats = this.toggleLock">
+      <ul *ngIf="!!chats">
         <li *ngFor="let username2 of chats | chatUsername : username" class="chat-list-item">
-          <a href="" [routerLink]="[username2]" routerLinkActive="true" class="chat-list-item-link">{{ username2 }}</a>
+          <a href="" [routerLink]="[username2]" routerLinkActive="true"
+             class="chat-list-item-link">{{ username2 }}</a>
         </li>
       </ul>
     </div>
@@ -14,7 +16,7 @@
         </mat-icon>
       </button>
     </div>
-    <div class="col-auto" id="chatDetailsView"
+    <div class="col-10 chat-detail-view"
          (click)="this.hideChats = this.toggleLock;"
          [class.hidden]="!hideChats && toggleLock">
       <router-outlet>

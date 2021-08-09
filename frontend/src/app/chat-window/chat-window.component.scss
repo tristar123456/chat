@@ -1,24 +1,35 @@
-.container {
-  width: 100%;
+.container-custom {
+  height: calc(100vh - 76px);
+}
+
+.row-custom{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.no-gutters {
   padding: 0;
   margin: 0;
 }
 
-div {
+.chat-list {
   max-width: 270px;
   transition: 300ms ease-out;
   opacity: 100;
   width: auto;
 
-  .chat-list {
-    height: 85vh;
-    overflow: scroll;
+  ul {
+    height: calc(100vh - 76px);
+    overflow: auto;
     width: auto;
     padding: 0;
     margin: 0;
+    border: none;
 
     border-bottom-right-radius: 8px;
     border-top-right-radius: 8px;
+
     :first-child {
       border-top-right-radius: 8px;
     }
@@ -64,20 +75,19 @@ div {
 }
 
 .toggle {
-  padding: 0;
+  display: flex;
   transition: 300ms ease;
 
   button {
     border: 0;
     outline: 0;
-    padding: 0;
     margin: 0;
     box-shadow: none;
 
     background-color: transparent;
   }
 
-  .flip-arrow-side{
+  .flip-arrow-side {
     transform: rotate(180deg);
     transition: 300ms ease;
   }
@@ -88,8 +98,4 @@ div {
   opacity: 0;
   transform: translateX(-500px);
   transition: 300ms ease;
-}
-
-#chatDetailsView{
-  height: auto;
 }

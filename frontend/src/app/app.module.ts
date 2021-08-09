@@ -21,6 +21,7 @@ import {SizeDetectorComponent} from "./size-detector/size-detector.component";
 import {UserComponent} from './user/user.component';
 import {MatError} from "@angular/material/form-field";
 import {ReactiveFormsModule} from "@angular/forms";
+import { ScrollingModule} from "@angular/cdk/scrolling";
 
 const routes: Routes = [
   {path: 'chat', component: ChatWindowComponent, canActivate: [AuthGuard], children:[
@@ -54,7 +55,8 @@ const routes: Routes = [
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ScrollingModule
   ],
   exports: [
     RouterModule

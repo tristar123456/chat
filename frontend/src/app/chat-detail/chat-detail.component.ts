@@ -3,6 +3,7 @@ import {BackendService} from "../backend.service";
 import {ActivatedRoute} from "@angular/router";
 import {Chat} from "./Chat";
 import {Message} from "./Message";
+import {FormControl, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-chat-detail',
@@ -12,7 +13,10 @@ import {Message} from "./Message";
 export class ChatDetailComponent implements OnInit {
   chatId: string|undefined;
   username2: string | undefined;
-  messages: Message[] = {} as Message[];
+  messages: Message[] | undefined;
+  chatTextArea: FormControl = new FormControl('', [
+    Validators.required
+  ] );
 
   constructor(
     private backendService: BackendService,
@@ -39,17 +43,19 @@ export class ChatDetailComponent implements OnInit {
     });
   }
 
-  sendMessage($event: any) {
-    const msgText = $event.target.value;
-    this.backendService.sendMsg(this.chatId!, msgText).then(
-      () => {
-        $event.target.value = "";
-        this.getChat((this.username2 === "none" ? "" : this.username2!));
-      }
-    );
-  }
-
-  getAllMessages(): Message[] {
-    return this.messages;
+  sendMessage() {
+    if (this.chatTextArea.valid){
+      const msgText = this.chatTextArea.value;
+      this.backendService.sendMsg(this.chatId!, msgText).then(
+        () => {
+          this.chatTextArea.patchValue("");
+          this.getChat((this.username2 === "none" ? "" : this.username2!));
+        }
+      );
+    } else {
+      setTimeout(()=>{
+        this.chatTextArea.reset();
+      },1)
+    }
   }
 }
