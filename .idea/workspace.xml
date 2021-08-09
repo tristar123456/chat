@@ -3,12 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="ff06c6bb-bd03-42c4-8e7d-29e6f2b1914d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/backend.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/backend.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/chat-detail/chat-detail.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/chat-detail/chat-detail.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/chat-detail/chat-detail.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/chat-detail/chat-detail.component.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/chat-detail/chat-detail.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/chat-detail/chat-detail.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/chat-window/chat-window.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/chat-window/chat-window.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/chat-window/chat-window.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/chat-window/chat-window.component.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +71,7 @@
       <workItem from="1627580462329" duration="11044000" />
       <workItem from="1627729138452" duration="6926000" />
       <workItem from="1627828464493" duration="5034000" />
-      <workItem from="1628446794417" duration="17739000" />
+      <workItem from="1628446794417" duration="19694000" />
     </task>
     <servers />
   </component>

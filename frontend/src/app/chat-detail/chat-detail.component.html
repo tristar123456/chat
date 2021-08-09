@@ -3,7 +3,7 @@
     <h1 class="chat-caption">{{username2}}</h1>
     <cdk-virtual-scroll-viewport itemSize="20" class="messages">
       <ul *ngIf="messages">
-        <li *cdkVirtualFor="let msg of messages">
+        <li *cdkVirtualFor="let msg of messages; let e = even" [class.right]="e">
           {{msg.txt}}
         </li>
     </ul>

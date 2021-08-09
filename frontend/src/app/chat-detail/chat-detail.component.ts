@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {BackendService} from "../backend.service";
 import {ActivatedRoute} from "@angular/router";
 import {Chat} from "./Chat";
 import {Message} from "./Message";
 import {FormControl, Validators} from "@angular/forms";
+import {CdkVirtualScrollViewport} from "@angular/cdk/scrolling";
 
 @Component({
   selector: 'app-chat-detail',
@@ -11,12 +12,16 @@ import {FormControl, Validators} from "@angular/forms";
   styleUrls: ['./chat-detail.component.scss']
 })
 export class ChatDetailComponent implements OnInit {
+
+  @ViewChild(CdkVirtualScrollViewport) viewport: CdkVirtualScrollViewport | undefined;
+
   chatId: string|undefined;
   username2: string | undefined;
   messages: Message[] | undefined;
   chatTextArea: FormControl = new FormControl('', [
     Validators.required
   ] );
+
 
   constructor(
     private backendService: BackendService,
@@ -40,6 +45,9 @@ export class ChatDetailComponent implements OnInit {
   private getChat(username2: string): void{
     this.backendService.getChat((username2==="none"? "" : username2!)).then( messages =>{
       this.messages = messages;
+      setTimeout(() => {
+        this.viewport!.scrollToIndex(99999);
+      },50)
     });
   }
 

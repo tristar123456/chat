@@ -35,7 +35,7 @@ export class BackendService {
     );
   }
 
-  async getChat(username2: string): Promise<Message[]> {
+  getChat(username2: string): Promise<Message[]> {
     return this.httpClient.get<Message[]>(environment.apiUrl + "/chat/" + username2).toPromise().catch(
       error => {
         console.log(error);
